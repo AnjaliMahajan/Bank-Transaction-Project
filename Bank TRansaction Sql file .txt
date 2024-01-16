@@ -1,0 +1,69 @@
+//Creating Tables
+
+CREATE TABLE Transaction (
+    TransId VARCHAR(4) PRIMARY KEY,
+    Acctno INT,
+    OldBal DECIMAL(10, 2),
+    Transtype VARCHAR(10),
+    TransAmt DECIMAL(10, 2),
+    NewBal DECIMAL(10, 2),
+    TransStat VARCHAR(10)
+);
+
+
+// INSERT TABLES 
+
+INSERT INTO Transactions (TransId, Acctno, OldBal, Transtype, TransAmt) VALUES ('T010',3322, 8000.00, 'Withdrawal', 5500.00);
+INSERT INTO Transaction(TransId, Acctno, OldBal, Transtype, TransAmt) VALUES ('T010',3322, 9000.00, 'Withdrawal', 5000.00);
+INSERT INTO Transaction(TransId, Acctno, OldBal, Transtype, TransAmt) VALUES ('T011',3433, 7500.00, 'Withdrawal', 8000.00);
+INSERT INTO Transaction(TransId, Acctno, OldBal, Transtype, TransAmt) VALUES ('T012',3544, 6000.00, 'Deposit', 2000.00);
+INSERT INTO Transaction(TransId, Acctno, OldBal, Transtype, TransAmt) VALUES ('T013',3655, 5000.00, 'Deposit', 4500.00);
+INSERT INTO Transaction(TransId, Acctno, OldBal, Transtype, TransAmt) VALUES ('T014',3666, 5500.00, 'Withdrawal', 4500.00);
+
+// SELECT TABLES
+
+TRAN     ACCTNO     OLDBAL TRANSTYPE    TRANSAMT     NEWBAL TRANSSTAT
+---- ---------- ---------- ---------- ---------- ---------- ----------
+T014       3666       5500 Withdrawal       4500       1000 Valid
+T010       3322       9000 Withdrawal       5000       4000 Valid
+T011       3433       7500 Withdrawal       8000       -500 Invalid
+T012       3544       6000 Deposit          2000       8000 Valid
+T013       3655       5000 Deposit          4500       9500 Valid
+
+
+// Creating ValidTrans Table 
+
+CREATE TABLE validtrans (
+  TransId VARCHAR2(4) PRIMARY KEY,
+  TransType VARCHAR2(10),
+  TransAmt DECIMAL(10, 2),
+  ValidMessage VARCHAR2(10)
+);
+
+
+// Select table 
+
+
+TRAN TRANSTYPE    TRANSAMT VALIDMESSA
+---- ---------- ---------- ----------
+T014 Withdrawal       4500 Valid
+T010 Withdrawal       5000 Valid
+T012 Deposit          2000 Valid
+T013 Deposit          4500 Valid
+
+
+// Creating Invalidtrans Table
+
+CREATE TABLE invalidtrans (
+  TransId VARCHAR2(4) PRIMARY KEY,
+  TransType VARCHAR2(10),
+  TransAmt DECIMAL(10, 2),
+  ValidMessage VARCHAR2(10)
+);
+
+// Select Table 
+
+TRAN TRANSTYPE    TRANSAMT VALIDMESSA
+---- ---------- ---------- ----------
+T011 Withdrawal       8000 Invalid
+ 
